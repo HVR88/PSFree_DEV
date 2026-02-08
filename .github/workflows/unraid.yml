@@ -16,8 +16,8 @@ jobs:
   unraid:
     runs-on: ubuntu-latest
     env:
-      TEMPLATE_REPO: ${{ vars.UNRAID_TEMPLATES_REPO }}
-      TEMPLATE_REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+      TEMPLATE_REPO: HVR88/unraid_templates
+      TEMPLATE_REPO_TOKEN: ${{ secrets.TEMPLATES_REPO_PAT }}
       THIS_REPO_NAME: ${{ github.event.repository.name }}
 
     steps:
@@ -132,7 +132,7 @@ jobs:
       - name: Skip templates repo publish (missing config)
         if: ${{ env.TEMPLATE_REPO == '' || env.TEMPLATE_REPO_TOKEN == '' }}
         run: |
-          echo "Skipping publish to templates repo. Set UNRAID_TEMPLATES_REPO (repo like owner/name) as a GitHub Actions variable and REPO_TOKEN as the shared repo token secret."
+          echo "Skipping publish to templates repo. Set TEMPLATE_REPO and TEMPLATES_REPO_PAT to enable publishing."
 
       - name: Attach Unraid template to GitHub Release
         if: github.event_name == 'release'
