@@ -8,7 +8,7 @@ A lightweight local web server for hosting the PSFree exploit with latest GoldHE
 
 PSFree_Docker is based on [PSFree from Nazky](https://github.com/Nazky/PSFree) - (this repo is mainly interesting for developers)
 
-_Normal people want the **Docker Container**_ to exploit their PS4:
+_Normal people want the **Docker Container**_ plus the Compose file below to exploit their PS4:
 
 > [!NOTE]
 >

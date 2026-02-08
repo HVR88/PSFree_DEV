@@ -21,6 +21,8 @@ PS4 7.0 - 9.6
 
 Deploy with docker-compose, Portainer, Unraid, etc… Your Docker host should ideally support MACVLAN or IPVLAN networking
 
+Get the compose file here: https://github.com/HVR88/PSFree_Docker or clone the repo.
+
 #### **Container Settings:**
 
 1. select/set your macvlan network (br0 on Unraid)
