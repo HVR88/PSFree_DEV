@@ -1,4 +1,4 @@
-# PSFree Web Host - Docker Deployment
+# **PSFree Web Host - Docker Deployment**
 
 A lightweight web server + the latest GoldHEN for PS4 firmware 7.0 - 9.6
 
@@ -20,6 +20,10 @@ _PSFree_Docker is based on [PSFree from Nazky](https://github.com/Nazky/PSFree)_
 # Quick Start
 
 Deploy with docker-compose, Portainer, Unraid, etc… Your Docker host should ideally support MACVLAN or IPVLAN networking
+
+```
+git clone https://github.com/HVR88/PSFree_Docker
+```
 
 #### **Edit `.env` to match your network and IP settings:**
 
