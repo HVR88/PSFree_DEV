@@ -19,13 +19,7 @@ jobs:
       - name: Checkout dev repo
         uses: actions/checkout@v4
 
-      - name: Missing deploy token
-        if: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT == '' }}
-        run: |
-          echo "PSFREE_DOCKER_DEPLOY_PAT is not set; skipping deploy."
-
       - name: Checkout deploy repo
-        if: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT != '' }}
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository_owner }}/PSFree_Docker
@@ -33,14 +27,12 @@ jobs:
           path: deploy-repo
 
       - name: Export deploy content
-        if: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT != '' }}
         env:
           DEPLOY_REPO: deploy-repo
           DEPLOY_DELETE: "1"
         run: ./export-deploy.sh
 
       - name: Commit and push deploy repo
-        if: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT != '' }}
         working-directory: deploy-repo
         run: |
           set -euo pipefail
