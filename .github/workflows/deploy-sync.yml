@@ -1,0 +1,57 @@
+name: Deploy Sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - deploy/**
+      - export-deploy.sh
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev repo
+        uses: actions/checkout@v4
+
+      - name: Missing deploy token
+        if: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT == '' }}
+        run: |
+          echo "PSFREE_DOCKER_DEPLOY_PAT is not set; skipping deploy."
+
+      - name: Checkout deploy repo
+        if: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/PSFree_Docker
+          token: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT }}
+          path: deploy-repo
+
+      - name: Export deploy content
+        if: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT != '' }}
+        env:
+          DEPLOY_REPO: deploy-repo
+          DEPLOY_DELETE: "1"
+        run: ./export-deploy.sh
+
+      - name: Commit and push deploy repo
+        if: ${{ secrets.PSFREE_DOCKER_DEPLOY_PAT != '' }}
+        working-directory: deploy-repo
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No deploy changes to push."
+            exit 0
+          fi
+
+          git commit -m "Deploy from ${GITHUB_REPOSITORY}@${GITHUB_SHA}"
+          git push
