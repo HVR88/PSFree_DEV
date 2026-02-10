@@ -13,7 +13,7 @@ runtime:
 
 ui:
   webui: "http://[IP]:[PORT:80]/"
-  icon: "https://raw.githubusercontent.com/HVR88/PSFree_Docker/main/extras/icon.png"
+  icon: "https://raw.githubusercontent.com/HVR88/PSFree_DEV/main/extras/icon.png"
 
 template_url: "https://raw.githubusercontent.com/HVR88/unraid_templates/refs/heads/main/PSFree_Docker/unraid-template.xml"
 category: "Network:Web Games:Tools"
