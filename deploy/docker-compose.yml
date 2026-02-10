@@ -31,7 +31,7 @@ services:
     #   - "52721:52721"  => browse http://HOST:52721/  (changes bind and host port - don't do this)
     #
     # ports:
-    #   - "52721:80"
+    #   - "${HOST_PORT:-8080}:${PSFREE_PORT:-80}"
 
     restart: unless-stopped
 
