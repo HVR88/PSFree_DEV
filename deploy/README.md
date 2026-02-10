@@ -52,4 +52,5 @@ Go to _Settings → User Guide_ and the exploit loads automatically → Enjoy!
 - Data volume: `./data` is mapped into `/PSFree` inside the container
 - For macvlan mode, keep `ports:` commented out and set a LAN IP
 - For bridge mode, uncomment `ports:` and remove the `networks:` section
+- For bridge mode, set `HOST_PORT` in `.env` to the host-side port you want
 - Project source code & build workflows: https://github.com/HVR88/PSFree_DEV
